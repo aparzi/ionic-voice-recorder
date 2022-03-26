@@ -1,0 +1,20 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Voice Recorder</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div id="container">
+    <ion-button (click)="startRecording()" color="success">Start</ion-button>
+    <ion-button (click)="stopRecording()" color="danger">Stop</ion-button>
+  </div>
+  <ion-list>
+    <ion-item *ngFor="let file of storedFileNames" (click)="playFile(file)">
+      <ion-button color="light">{{file}}</ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>
