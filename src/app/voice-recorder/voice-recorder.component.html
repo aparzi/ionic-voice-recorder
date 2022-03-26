@@ -8,13 +8,32 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div id="container">
-    <ion-button (click)="startRecording()" color="success">Start</ion-button>
-    <ion-button (click)="stopRecording()" color="danger">Stop</ion-button>
-  </div>
   <ion-list>
     <ion-item *ngFor="let file of storedFileNames" (click)="playFile(file)">
-      <ion-button color="light">{{file}}</ion-button>
+      {{file}}
+      <ion-button slot="end" (click)="deleteRecording(file)" fill="clear" color="danger">
+        <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+      </ion-button>
     </ion-item>
   </ion-list>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="10">
+        <span *ngIf="!recording">
+          Press and hold to record
+        </span>
+        <span *ngIf="recording">
+          {{ durationDisplay }}
+        </span>
+      </ion-col>
+      <ion-col size="2">
+        <ion-button fill="clear" #recordbtn>
+          <ion-icon name="mic-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>
