@@ -4,8 +4,12 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/Inbox',
+    redirectTo: 'voice-recorder',
     pathMatch: 'full'
+  },
+  {
+    path: 'voice-recorder',
+    loadChildren: () => import('./voice-recorder/voice-recorder.module').then( m => m.VoiceRecorderModule)
   },
   {
     path: 'folder/:id',
