@@ -1,0 +1,27 @@
+#map {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+agm-map {
+  height: 300px !important;
+  width: 100%;
+}
+
+//agm-map {
+//  .gm-svpc {
+//    display: none;
+//  }
+//}
+ion-row {
+  height: 64px;
+  align-items: center;
+  background: black;
+  color: white;
+  ion-col {
+    text-align: center;
+  }
+}

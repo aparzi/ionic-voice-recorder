@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {VoiceRecorderComponent} from './voice-recorder.component';
+import {ContactListComponent} from './contact-list.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: VoiceRecorderComponent
+    component: ContactListComponent
   }
 ];
 
@@ -13,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class VoiceRecorderRoutingModule {}
+export class ContactListRoutingModule {}
