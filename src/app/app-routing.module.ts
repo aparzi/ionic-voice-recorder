@@ -4,8 +4,12 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'voice-recorder',
+    redirectTo: 'pokedex',
     pathMatch: 'full'
+  },
+  {
+    path: 'pokedex',
+    loadChildren: () => import('./pokedex/pokedex.module').then( m => m.PokedexModule)
   },
   {
     path: 'voice-recorder',
@@ -14,10 +18,6 @@ const routes: Routes = [
   {
     path: 'contact-list',
     loadChildren: () => import('./contact-management/contact-list.module').then( m => m.ContactListModule)
-  },
-  {
-    path: 'folder/:id',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
   }
 ];
 

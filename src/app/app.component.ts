@@ -8,12 +8,10 @@ import {Component} from '@angular/core';
 export class AppComponent {
 
   public appPages = [
+    {title: 'Pokedex', url: '/pokedex', icon: 'list'},
     {title: 'Voice recorder', url: '/voice-recorder', icon: 'mic-circle'},
     {title: 'Contact list', url: '/contact-list', icon: 'call'},
-    {title: 'Outbox', url: '/folder/Outbox', icon: 'paper-plane'},
-    {title: 'Favorites', url: '/folder/Favorites', icon: 'heart'},
-    {title: 'Archived', url: '/folder/Archived', icon: 'archive'},
-    {title: 'Trash', url: '/folder/Trash', icon: 'trash'}
+    {title: 'Random Contact', url: '/folder/Outbox', icon: 'paper-plane'}
   ];
 
   constructor() {
