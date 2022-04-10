@@ -8,7 +8,10 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-list>
+  <!-- Spinner -->
+  <ion-spinner *ngIf="loading" name="crescent"></ion-spinner>
+
+  <ion-list *ngIf="!loading">
     <ion-item *ngFor="let file of storedFileNames" (click)="playFile(file)">
       {{file}}
       <ion-button slot="end" (click)="deleteRecording(file)" fill="clear" color="danger">

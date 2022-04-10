@@ -1,0 +1,24 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Locations</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let location of locations;">
+      <ion-label class="ion-text-capitalize">
+        <h2>{{ location?.name }}</h2>
+        <p>#{{ location?.region }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-infinite-scroll (ionInfinite)="loadLocations(true, $event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more Locations...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

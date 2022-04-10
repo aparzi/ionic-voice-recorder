@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {map} from 'rxjs/operators';
+import {combineAll, map, mergeMap, switchMap} from 'rxjs/operators';
+import {combineLatest, forkJoin, Observable, of} from "rxjs";
 
 interface IResult {
   count: number;
@@ -12,7 +13,7 @@ interface IResult {
 @Injectable({
   providedIn: 'root'
 })
-export class PokedexService {
+export class PokeService {
 
   baseUrl = 'https://pokeapi.co/api/v2';
   imageUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/';
@@ -55,6 +56,15 @@ export class PokedexService {
           .map(spriteKey => poke.sprites[spriteKey])
           .filter(img => img);
         return poke;
+      })
+    );
+  }
+
+  getLocations(offset = 0) {
+    return this.http.get(`${this.baseUrl}/location?offset=${offset}&limit=25`).pipe(
+      switchMap((result: IResult) => {
+        const requests$ = result?.results.map(r => this.http.get(r?.url));
+        return forkJoin(requests$);
       })
     );
   }

@@ -12,8 +12,8 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then( m => m.HomeModule)
   },
   {
-    path: 'pokedex',
-    loadChildren: () => import('./pokedex/pokedex.module').then( m => m.PokedexModule)
+    path: 'poke',
+    loadChildren: () => import('./poke/poke.module').then( m => m.PokeModule)
   },
   {
     path: 'voice-recorder',
@@ -22,6 +22,10 @@ const routes: Routes = [
   {
     path: 'contact-list',
     loadChildren: () => import('./contact-management/contact-list.module').then( m => m.ContactListModule)
+  },
+  {
+    path: 'random-contact',
+    loadChildren: () => import('./random-contact/random-contact.module').then( m => m.RandomContactModule)
   }
 ];
 

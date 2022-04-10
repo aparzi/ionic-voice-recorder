@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {PokedexService} from './pokedex.service';
 import {IonInfiniteScroll} from '@ionic/angular';
 import {RecordingData, VoiceRecorder} from 'capacitor-voice-recorder';
 import {Directory, Filesystem} from '@capacitor/filesystem';
+import {PokeService} from '../poke.service';
 
 @Component({
   selector: 'app-pokedex',
@@ -16,7 +16,7 @@ export class PokedexComponent implements OnInit, OnDestroy {
   offset = 0;
   pokemon = [];
 
-  constructor(private pokedexService: PokedexService) {
+  constructor(private pokeService: PokeService) {
   }
 
   ngOnInit() {
@@ -33,7 +33,7 @@ export class PokedexComponent implements OnInit, OnDestroy {
       this.offset += 25;
     }
 
-    this.pokedexService.getPokemon(this.offset).subscribe(res => {
+    this.pokeService.getPokemon(this.offset).subscribe(res => {
       this.pokemon = [...this.pokemon, ...res];
 
       if (event) {
@@ -56,7 +56,7 @@ export class PokedexComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.pokedexService.findPokemon(value).subscribe(res => {
+    this.pokeService.findPokemon(value).subscribe(res => {
       this.pokemon = [res];
     }, err => {
       this.pokemon = [];

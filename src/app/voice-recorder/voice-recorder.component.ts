@@ -18,13 +18,18 @@ export class VoiceRecorderComponent implements OnInit, AfterViewInit {
   public storedFileNames = [];
   public durationDisplay = '';
   public duration = 0;
+  public loading = false;
 
   constructor(private gestureCtrl: GestureController,
               private toastController: ToastController) {
   }
 
   ngOnInit(): void {
-    this.loadFiles();
+    this.loading = true;
+    setTimeout(() => {
+      this.loading = false;
+      this.loadFiles();
+    }, 3000);
     VoiceRecorder.requestAudioRecordingPermission();
   }
 
@@ -86,8 +91,9 @@ export class VoiceRecorderComponent implements OnInit, AfterViewInit {
       path: '',
       directory: Directory.Data
     }).then(result => {
-      console.log(result);
       this.storedFileNames = result.files;
+    }).catch(error => {
+      console.error('Error fetch data => ', error);
     });
   }
 
