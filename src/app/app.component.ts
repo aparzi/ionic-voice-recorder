@@ -8,6 +8,7 @@ import {Component} from '@angular/core';
 export class AppComponent {
 
   public appPages = [
+    {title: 'Home', url: '/home', icon: 'home'},
     {title: 'Pokedex', url: '/pokedex', icon: 'list'},
     {title: 'Voice recorder', url: '/voice-recorder', icon: 'mic-circle'},
     {title: 'Contact list', url: '/contact-list', icon: 'call'},

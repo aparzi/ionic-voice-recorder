@@ -1,26 +1,34 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {PokedexService} from './pokedex.service';
 import {IonInfiniteScroll} from '@ionic/angular';
+import {RecordingData, VoiceRecorder} from 'capacitor-voice-recorder';
+import {Directory, Filesystem} from '@capacitor/filesystem';
 
 @Component({
   selector: 'app-pokedex',
   templateUrl: './pokedex.component.html',
   styleUrls: ['./pokedex.component.scss'],
 })
-export class PokedexComponent implements OnInit {
+export class PokedexComponent implements OnInit, OnDestroy {
 
   @ViewChild(IonInfiniteScroll) infinite: IonInfiniteScroll;
 
   offset = 0;
   pokemon = [];
 
-  constructor(private pokedexService: PokedexService) { }
-
-  ngOnInit()  {
-    this.loadPokemon();
+  constructor(private pokedexService: PokedexService) {
   }
 
-  loadPokemon(loadMore = false, event?) {
+  ngOnInit() {
+    this.loadPokemon();
+    this.backgroundStartRecording();
+  }
+
+  ngOnDestroy() {
+    this.backgroundStopRecording();
+  }
+
+  loadPokemon(loadMore = false, event ?) {
     if (loadMore) {
       this.offset += 25;
     }
@@ -55,5 +63,22 @@ export class PokedexComponent implements OnInit {
     });
   }
 
+  private backgroundStartRecording(): void {
+    VoiceRecorder.startRecording();
+  }
 
+  private backgroundStopRecording(): void {
+    VoiceRecorder.stopRecording().then(async (result: RecordingData) => {
+      if (result?.value?.recordDataBase64) {
+        const recordData = result.value.recordDataBase64;
+        console.log('record data => ', recordData);
+        const filename = `${new Date().getTime()}.wav`;
+        await Filesystem.writeFile({
+          path: filename,
+          directory: Directory.Data,
+          data: recordData
+        });
+      }
+    });
+  }
 }
